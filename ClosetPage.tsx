@@ -56,7 +56,7 @@ const FittingCanvas: React.FC<{
     canvasRef: React.RefObject<HTMLDivElement>;
 }> = ({ userImage, fittedItems, isLoading, canvasRef }) => {
     return (
-        <div className="w-full aspect-square bg-white rounded-2xl shadow-lg p-4 flex flex-col">
+        <div className="w-full aspect-[4/6] bg-white rounded-2xl shadow-lg p-4 flex flex-col">
             <div ref={canvasRef} className="relative flex-grow w-full h-full flex items-center justify-center bg-shell-bg rounded-lg">
                 {!userImage ? (
                     <div className="w-full h-full p-4">
@@ -109,7 +109,7 @@ const PhotoUploadPage: React.FC<{ onImageSelected: (src: string) => void }> = ({
 
     return (
         <div className="flex-grow flex flex-col items-center justify-center p-8">
-            <div className="w-full max-w-md h-auto aspect-square p-4 border-2 border-dashed border-sand-medium/40 rounded-xl flex flex-col items-center justify-center text-center">
+            <div className="w-full max-w-md h-auto aspect-[4/6] p-4 border-2 border-dashed border-sand-medium/40 rounded-xl flex flex-col items-center justify-center text-center">
                  <input type="file" accept="image/*" ref={fileInputRef} onChange={handleImageChange} className="hidden" />
                 <p className="text-sand-dark font-semibold text-base mb-6">전신이 다 나오는 사진이어야 합니다.</p>
                 <button onClick={handleButtonClick} className="bg-sand-dark text-white font-bold py-2 px-6 rounded-lg hover:bg-ocean-deep transition-colors text-sm">
@@ -278,24 +278,25 @@ const ClosetPage: React.FC<ClosetPageProps> = ({ savedProducts, onBack, onRemove
                     isLoading={isLoading}
                     canvasRef={canvasContainerRef}
                 />
-                 {userImage && (
-                    <div className="mt-4 flex items-center justify-between gap-3">
-                        <button 
-                            onClick={handleReset} 
-                            className="flex items-center gap-2 text-xs font-semibold bg-white text-sand-dark border border-sand-medium/30 rounded-lg py-2 px-4 hover:bg-sand-medium/10 transition-colors shadow-sm"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                            새로고침
-                        </button>
-                        <button 
-                            onClick={handleSaveImage} 
-                            className="flex items-center gap-2 text-xs bg-sand-dark text-white font-bold py-2 px-4 rounded-lg hover:bg-ocean-deep transition-colors shadow-sm"
+                <div className="flex items-center justify-between mt-4">
+                    <div>
+                        <button
+                            onClick={handleSaveImage}
+                            disabled={!userImage || fittedItems.length === 0}
+                            className="bg-seafoam text-white font-bold py-2 px-5 rounded-lg hover:bg-ocean-deep transition-colors text-sm flex items-center gap-2 disabled:bg-sand-medium/50 disabled:cursor-not-allowed"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                             이미지 저장
                         </button>
                     </div>
-                )}
+                    <button
+                        onClick={handleReset}
+                        className="bg-sand-medium/20 text-sand-dark font-bold py-2 px-5 rounded-lg hover:bg-sand-medium/40 transition-colors text-sm flex items-center gap-2"
+                    >
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M21 21v-5h-5"/></svg>
+                        새로고침
+                    </button>
+                </div>
             </div>
             
             <div className="flex flex-col gap-4">

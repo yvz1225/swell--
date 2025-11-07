@@ -21,7 +21,7 @@ const ImageCropModal: React.FC<ImageCropModalProps> = ({ src, onCropComplete, on
             if (!ctx) return;
 
             const canvasWidth = 300;
-            const canvasHeight = 300;
+            const canvasHeight = 450;
             canvas.width = canvasWidth;
             canvas.height = canvasHeight;
 
@@ -63,7 +63,7 @@ const ImageCropModal: React.FC<ImageCropModalProps> = ({ src, onCropComplete, on
                 <p className="text-xs text-sand-medium text-center mb-4">
                     Your photo will be cropped to fit the frame.
                 </p>
-                <div className="w-[300px] h-[300px] bg-sand-medium/10 rounded-lg overflow-hidden">
+                <div className="w-[300px] h-[450px] bg-sand-medium/10 rounded-lg overflow-hidden">
                     {error ? (
                          <div className="w-full h-full flex items-center justify-center text-coral p-4 text-sm">{error}</div>
                     ) : (
